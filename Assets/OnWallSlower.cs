@@ -9,7 +9,6 @@ public class OnWallSlower : MonoBehaviour
     public void OnTriggerStay2D(Collider2D other)
     {
         var bird = other.GetComponent<Rigidbody2D>();
-        Debug.Log(other.gameObject.name);
 
         if (other.gameObject.name == "bird")
         {
