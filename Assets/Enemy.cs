@@ -2,42 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
     public GameObject enemy;
+    public GameObject sparrow;
     public LayerMask LayersToHit;
+    Transform ray;
     RaycastHit2D hit;
+    float countdown;
+    float rayscaler = 0.8953f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ray = enemy.transform.Find("ray");
+
+        countdown = Random.Range(20, 70);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemy.transform.position.x < 0)
-        {
-            hit = Physics2D.Raycast(enemy.transform.GetChild(0).position, new Vector2(1, 0), 5000f, LayersToHit);
 
-        }
-        else
-        {
-            hit = Physics2D.Raycast(enemy.transform.GetChild(0).position, new Vector2(-1, 0), 5000f, LayersToHit);
 
-        }
+        //if(countdown > 0)
+        //{
+        // countdown -= Time.deltaTime;
+        //while(rayscaler > 0.8953f)
+        //{
+        //  rayscaler--;
+        //}
 
-        if (hit)
-        {
-            Debug.Log("Detected");
-        }
-
+        //}
+        //else if(countdown <= 0)
+        //{
+        //rayscaler++;
+        //countdown = Random.Range(0, 11);
+        //}
+       // ray.localScale = new Vector3(rayscaler += 0.001f, 0.1f, 1);
+        //Debug.Log(rayscaler);
     }
-    //private void OnDrawGizmos()
-    //{
-      //  Gizmos.color = Color.red;
-        //Vector3 direction = enemy.transform.TransformDirection(Vector3.right) * 5;
-        //Gizmos.DrawRay(enemy.transform.position, direction);
-    //}
-
 }
