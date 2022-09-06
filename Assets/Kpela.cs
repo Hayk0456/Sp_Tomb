@@ -14,37 +14,27 @@ public class Kpela : MonoBehaviour
         countdown = Random.Range(0, 12);
     }
     // Start is called before the first frame update
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-
-
-        if (other.gameObject.name == "bird")
-        {
-            Debug.Log("Kpela araaaa vateees");
-        }
-
-      
-    }
    void Update()
     {
-        Debug.Log(countdown);
+
         if (countdown > 0)
         {
            
             if (rayscaler > 0.8953f)
             {
-                rayscaler-=Time.deltaTime*10;
+                rayscaler-=Time.deltaTime*3;
             }
             else
             {
-                countdown -= Time.deltaTime;
+                countdown -= Time.deltaTime*4;
             }
 
         }
         else if (countdown <= 0)
         {
-            rayscaler+= Time.deltaTime * 10;
-            if (rayscaler >= 50) {
+            int k = Random.Range(10, 30);
+            rayscaler+= Time.deltaTime*10;
+            if (rayscaler >= k) {
 
                 countdown = Random.Range(0, 11);
 

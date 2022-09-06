@@ -12,75 +12,95 @@ public class bird : MonoBehaviour
     float cooldown;
     bool check;
     float y_veloc_control = -30f;
+
+    private bool IsDead = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
       
     }
+    public bool GetterisDead()
+    {
+        return IsDead;
+    }
+    public void SetterisDead(bool a)
+    {
+        IsDead = a;
+    }
+
 
     private void Update()
     {
-        y_veloc_control = -10f;
-        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 20f));
-        
-
-        if (Input.GetMouseButtonDown(0))
+        if(IsDead)
         {
-            StartPos = Input.mousePosition;
-            
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, 100, 200));
         }
-        if (Input.GetMouseButton(0) && !check)
+        else
         {
-            Time.timeScale = 0.5f;
-            cooldown = 1;
-            Force = (Input.mousePosition - StartPos)*1.2f;
-            
-            if((Force.x)*1.2f > 350)
-            {
-                Force.x = 350;
-            }
-            else if((Force.x) * 1.2f < -350)
-            {
-                Force.x = -350;
-            }
-            if ((Force.y) * 1.2f > 800)
-            {
-                Force.y = 800;
-            }
-            else if ((Force.y) * 1.2f < -800)
-            {
-                Force.y = -800;
-            }
+            y_veloc_control = -10f;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 20f));
 
 
-        }
-        if (Input.GetMouseButtonUp(0) && cooldown == 1)
-        {
-            y_veloc_control = -1f;
-            Time.timeScale = 1f;
-            if (rb.velocity.y < -20)
+            if (Input.GetMouseButtonDown(0))
             {
-                rb.AddForce(Force*2);
+                StartPos = Input.mousePosition;
+
             }
-            else
+            if (Input.GetMouseButton(0) && !check)
             {
-                rb.AddForce(Force);
+                Time.timeScale = 0.5f;
+                cooldown = 1;
+                Force = (Input.mousePosition - StartPos) * 1.2f;
+
+                if ((Force.x) * 1.2f > 350)
+                {
+                    Force.x = 350;
+                }
+                else if ((Force.x) * 1.2f < -350)
+                {
+                    Force.x = -350;
+                }
+                if ((Force.y) * 1.2f > 800)
+                {
+                    Force.y = 800;
+                }
+                else if ((Force.y) * 1.2f < -800)
+                {
+                    Force.y = -800;
+                }
+
+
             }
-         
-            check = true;
-            
-            
-            
-        }
-        if (check)
-        {
-            cooldown = cooldown - Time.deltaTime;
-            if (cooldown < 0)
+            if (Input.GetMouseButtonUp(0) && cooldown == 1)
             {
-                check = false;
-                
+                y_veloc_control = -1f;
+                Time.timeScale = 1f;
+                if (rb.velocity.y < -20)
+                {
+                    rb.AddForce(Force * 2);
+                }
+                else
+                {
+                    rb.AddForce(Force);
+                }
+
+                check = true;
+
+
+
+            }
+            if (check)
+            {
+                cooldown = cooldown - Time.deltaTime;
+                if (cooldown < 0)
+                {
+                    check = false;
+
+                }
             }
         }
+       
 
     }
 
