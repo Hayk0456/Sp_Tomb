@@ -13,20 +13,11 @@ public class bird : MonoBehaviour
     bool check;
     float y_veloc_control = -30f;
 
-    private bool IsDead = false;
-
+    public bool IsDead = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
       
-    }
-    public bool GetterisDead()
-    {
-        return IsDead;
-    }
-    public void SetterisDead(bool a)
-    {
-        IsDead = a;
     }
 
 
@@ -34,7 +25,7 @@ public class bird : MonoBehaviour
     {
         if(IsDead)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, 100, 200));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -25, -10));
         }
         else
         {

@@ -10,9 +10,8 @@ public class OnWallSlower : MonoBehaviour
     {
         var bird = other.GetComponent<Rigidbody2D>();
 
-        if (other.gameObject.name == "bird")
+        if (other.gameObject.name == "bird" && FindObjectOfType<bird>().IsDead == false)
         {
-            
             bird.velocity = new Vector2(bird.velocity.x, Mathf.Clamp(bird.velocity.y, -1, 10f));
         }
 

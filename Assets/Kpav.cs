@@ -10,10 +10,7 @@ public class Kpav : MonoBehaviour
 
         if (other.gameObject.name == "bird")
         {
-            if (!GetterisDead())
-            {
-                SetterisDead(true);
-            }
+            FindObjectOfType<bird>().IsDead = true;
             Debug.Log("esel kpav");
         }
     }
