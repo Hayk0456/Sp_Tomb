@@ -12,7 +12,7 @@ public class bullet : MonoBehaviour
 
     public float speed;
 
-    public float bulletTime = 3f;
+    float bulletTime = 0.7f;
 
     // Start is called before the first frame update
 

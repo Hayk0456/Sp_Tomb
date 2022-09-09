@@ -40,7 +40,7 @@ public class bird : MonoBehaviour
             }
             if (Input.GetMouseButton(0) && !check)
             {
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.4f;
                 cooldown = 1;
                 Force = (Input.mousePosition - StartPos) * 1.2f;
 

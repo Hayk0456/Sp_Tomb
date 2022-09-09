@@ -76,16 +76,12 @@ public class EnemyBlockThrower : MonoBehaviour
 
         GameObject tmp1 = Instantiate(bullet, transform.position, new Quaternion());
             tmp1.transform.Rotate(new Vector3(0, 180, 180));
-        GameObject tmp3 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp3.transform.Rotate(new Vector3(0, 180, 210));
         GameObject tmp5 = Instantiate(bullet, transform.position, new Quaternion());
             tmp5.transform.Rotate(new Vector3(0, 180, 240));
-        GameObject tmp7 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp7.transform.Rotate(new Vector3(0, 180, 270));
+        GameObject tmp6 = Instantiate(bullet, transform.position, new Quaternion());
+        tmp6.transform.Rotate(new Vector3(0, 180, 270));
         GameObject tmp9 = Instantiate(bullet, transform.position, new Quaternion());
             tmp9.transform.Rotate(new Vector3(0, 180, 300));
-        GameObject tmp10 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp10.transform.Rotate(new Vector3(0, 180, 330));
         GameObject tmp11 = Instantiate(bullet, transform.position, new Quaternion());
             tmp11.transform.Rotate(new Vector3(0, 180, 360));
 
