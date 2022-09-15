@@ -40,6 +40,6 @@ public class Kpela : MonoBehaviour
 
             }
         }
-        ray.localScale = new Vector3(rayscaler, 0.1f, 1);
+        ray.localScale = new Vector3(rayscaler/2, 0.1f, 1);
     }
 }

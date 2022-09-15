@@ -25,13 +25,25 @@ public class bird : MonoBehaviour
     {
         if(IsDead)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -25, -10));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -70, -40));
         }
         else
         {
-            y_veloc_control = -10f;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 20f));
 
+            y_veloc_control = -10f;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 20f));//20f
+
+            if (rb.position.x < -3) { 
+            
+                Quaternion target = Quaternion.Euler(rb.transform.rotation.x, rb.transform.rotation.y, -35);
+                rb.transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 3f);
+            }
+            else if(rb.position.x > 3)
+            {
+                Quaternion target = Quaternion.Euler(rb.transform.rotation.x, rb.transform.rotation.y, 35);
+                rb.transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 3f);
+
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -42,21 +54,21 @@ public class bird : MonoBehaviour
             {
                 Time.timeScale = 0.4f;
                 cooldown = 1;
-                Force = (Input.mousePosition - StartPos) * 1.2f;
+                Force = (Input.mousePosition - StartPos) * 4f;
 
-                if ((Force.x) * 1.2f > 350)
+                if ((Force.x) > 350)
                 {
                     Force.x = 350;
                 }
-                else if ((Force.x) * 1.2f < -350)
+                else if (Force.x < -350)
                 {
                     Force.x = -350;
                 }
-                if ((Force.y) * 1.2f > 800)
+                if (Force.y > 800)
                 {
                     Force.y = 800;
                 }
-                else if ((Force.y) * 1.2f < -800)
+                else if (Force.y < -800)
                 {
                     Force.y = -800;
                 }
@@ -96,3 +108,5 @@ public class bird : MonoBehaviour
     }
 
 }
+
+

@@ -42,7 +42,7 @@ public class Enemy1Spawn : MonoBehaviour
         //  Instantiate(enemy4, new Vector3(0, i, 0), new Quaternion());
         //}
         //}
-        for (int i = 0; i < 500; i += 20)
+        for (int i = 0; i < 500; i += 40)
         {
             Instantiate(enemy3, new Vector3(0, i, 0), new Quaternion());
         }
