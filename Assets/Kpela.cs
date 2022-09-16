@@ -9,7 +9,7 @@ public class Kpela : MonoBehaviour
     Transform ray;
     void Start()
     {
-        ray = GetComponent<Transform>();
+        ray = transform.parent;
 
         countdown = Random.Range(0, 12);
     }
