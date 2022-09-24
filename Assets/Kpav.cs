@@ -10,9 +10,19 @@ public class Kpav : MonoBehaviour
 
         if (other.gameObject.name == "bird")
         {
-            FindObjectOfType<bird>().IsDead = true;
-            Time.timeScale = 1f;
-            Debug.Log("esel kpav");
+            if (FindObjectOfType<bird>().isarmored == false)
+            { 
+                FindObjectOfType<bird>().IsDead = true;
+                Time.timeScale = 1f;
+                Debug.Log("esel kpav");
+            }
+            else
+            {
+                FindObjectOfType<bird>().isarmored = false;
+                FindObjectOfType<bird>().boneus = 0;
+            }
+            
         }
+
     }
 }

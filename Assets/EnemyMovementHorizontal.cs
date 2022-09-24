@@ -10,7 +10,7 @@ public class EnemyMovementHorizontal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x >= 5 || transform.position.x <= -5)
+        if (transform.position.x >= 15 || transform.position.x <= -15)
         {
             k = -1 * k;
         }

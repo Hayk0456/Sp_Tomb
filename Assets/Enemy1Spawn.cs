@@ -11,6 +11,7 @@ public class Enemy1Spawn : MonoBehaviour
     public LayerMask LayersToHit;
     RaycastHit2D hit;
     LineRenderer laserline;
+    int k = 0;
 
 
     // Start is called before the first frame update
@@ -42,9 +43,19 @@ public class Enemy1Spawn : MonoBehaviour
         //  Instantiate(enemy4, new Vector3(0, i, 0), new Quaternion());
         //}
         //}
-        for (int i = 0; i < 500; i += 40)
+        for (int i = 0; i < 500; i += 170)
         {
-            Instantiate(enemy3, new Vector3(0, i, 0), new Quaternion());
+            k = Random.RandomRange(-1, 4);
+            if (k == -1)
+            {
+                Instantiate(enemy3, new Vector3(0, i, 0), new Quaternion());
+            }
+            if (k == 0)
+            {
+                Instantiate(enemy2, new Vector3(0, i, 0), new Quaternion());
+            }
+
+
         }
     }
 }

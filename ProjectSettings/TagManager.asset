@@ -6,6 +6,8 @@ TagManager:
   tags:
   - bird
   - laser
+  - Coin
+  - bone
   layers:
   - Default
   - TransparentFX
