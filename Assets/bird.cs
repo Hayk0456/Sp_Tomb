@@ -18,13 +18,15 @@ public class bird : MonoBehaviour
     Quaternion target;
     public Light2D sun;
     float target_intensity;
+    public GameObject armor;
 
     public bool IsDead = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         target_intensity = 0.67f;
-      
+
+
     }
 
 
@@ -33,6 +35,7 @@ public class bird : MonoBehaviour
         if(boneus >= 2)
         {
             isarmored = true;
+            armor.SetActive(true);
         }
         if(IsDead)
         {
@@ -83,6 +86,7 @@ public class bird : MonoBehaviour
                 Time.timeScale = 0.4f;
                 cooldown = 0.6f;
                 force = (Input.mousePosition - StartPos);
+                Debug.Log(force);
                 
                 /*
                 if ((Force.x) > 350)

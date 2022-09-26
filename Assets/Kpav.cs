@@ -20,8 +20,11 @@ public class Kpav : MonoBehaviour
             {
                 FindObjectOfType<bird>().isarmored = false;
                 FindObjectOfType<bird>().boneus = 0;
+                FindObjectOfType<bird>().armor.SetActive(false);
+
+
             }
-            
+
         }
 
     }
