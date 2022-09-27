@@ -11,7 +11,7 @@ public class bird : MonoBehaviour
     public int boneus = 0;
     Vector3 StartPos;
     private Vector3 force;
-    [SerializeField] private Vector3 forceMultipliers = new Vector3(0.5f, 5, 0);
+    [SerializeField] private Vector3 forceMultipliers = new Vector3(0.2f, 0.4f, 0);
     float cooldown;
     bool check;
     float y_veloc_control = -30f;
@@ -32,7 +32,7 @@ public class bird : MonoBehaviour
 
     private void Update()
     {
-        if(boneus >= 2)
+        if(boneus >= 5)
         {
             isarmored = true;
             armor.SetActive(true);
@@ -117,7 +117,7 @@ public class bird : MonoBehaviour
                 var appliedForce = new Vector3(force.x * forceMultipliers.x, force.y * forceMultipliers.y, force.z * forceMultipliers.z);
                 if (rb.velocity.y < -20)
                 {
-                    rb.AddForce(appliedForce * 2);
+                    rb.AddForce(appliedForce/2);
                 }
                 else
                 {

@@ -14,6 +14,6 @@ public class EnemyMovementHorizontal : MonoBehaviour
         {
             k = -1 * k;
         }
-        transform.Translate(k * Time.deltaTime, 0, 0);
+        transform.Translate(k * Time.deltaTime*5, 0, 0);
     }
 }

@@ -16,15 +16,4 @@ public class enemy1_walk : MonoBehaviour
     {
         nazduwar.position = new Vector3(nazduwar.position.x, nazduwar.position.y-0.01f, nazduwar.position.z);
     }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-
-
-        if (other.gameObject.name == "bird")
-        {
-            FindObjectOfType<bird>().IsDead = true;
-            Time.timeScale = 1f;
-            Debug.Log("esel kpav");
-        }
-    }
 }

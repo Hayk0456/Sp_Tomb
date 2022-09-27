@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
     Transform bird;
     public TMP_Text cointext;
     public TextMeshProUGUI youdied;
+    public TextMeshProUGUI youwon;
+    public Image anun;
+
     public Button restart;
     float restarto = 0;
     float dilate = 0;
+    public bool isended = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,12 @@ public class GameManager : MonoBehaviour
             restarto = Mathf.Lerp(restarto, 130, Time.deltaTime / 101);
 
 
+        }
+
+        if (isended)
+        {
+            anun.enabled = true;
+            youwon.enabled = true;
         }
     }
 

@@ -8,26 +8,28 @@ public class CameraFollowTarget : MonoBehaviour
     Vector3 offset;
     public Transform target;
     float timer = 0.5f;
+    bird Bird;
     void Start()
     {
+        Bird = FindObjectOfType<bird>();
         offset = transform.position - target.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         // if (target.position.y > -6)
         //{
-        if (FindObjectOfType<bird>().IsDead == false)
+        if (Bird.IsDead == false)
         {
-            transform.position = new Vector3(transform.position.x, target.position.y + 4, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x, target.position.y + 4, transform.position.z),5*Time.deltaTime);
         }
         else
         {
             timer -= Time.deltaTime;
             if(timer > 0)
-            transform.position = new Vector3(transform.position.x, target.position.y + 4, transform.position.z);
+                transform.position = new Vector3(transform.position.x, target.position.y + 4, transform.position.z);
         }
             
        // }

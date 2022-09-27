@@ -6,16 +6,18 @@ using UnityEngine.Rendering.Universal;
 public class turnoffthelight : MonoBehaviour
 {
     Light2D light;
+    bird Bird;
     // Start is called before the first frame update
     void Start()
     {
+        Bird = FindObjectOfType<bird>();
         light = GetComponent<Light2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(FindObjectOfType<bird>().IsDead == true)
+        if(Bird.IsDead)
         {
             light.intensity = 0;
         }
