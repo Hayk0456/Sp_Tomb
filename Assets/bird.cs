@@ -117,7 +117,7 @@ public class bird : MonoBehaviour
                 var appliedForce = new Vector3(force.x * forceMultipliers.x, force.y * forceMultipliers.y, force.z * forceMultipliers.z);
                 if (rb.velocity.y < -20)
                 {
-                    rb.AddForce(appliedForce/2);
+                    rb.AddForce(appliedForce/2,ForceMode2D.Impulse);
                 }
                 else
                 {
