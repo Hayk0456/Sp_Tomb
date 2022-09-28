@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         bird = FindObjectOfType<bird>().transform;
-       
+        restart.interactable = false ;
+
+
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
             youdied.text = "YOU DIED";
             youdied.color = new Color(youdied.color.r, youdied.color.g, youdied.color.b, dilate);
             restart.image.color = new Color(restart.image.color.r, restart.image.color.g, restart.image.color.b, restarto);
-
+            restart.interactable = true;
             dilate = Mathf.Lerp(dilate, 255, Time.deltaTime/101);
             restarto = Mathf.Lerp(restarto, 130, Time.deltaTime / 101);
 
