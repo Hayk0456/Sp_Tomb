@@ -6,10 +6,15 @@ public class KnifeHitting : MonoBehaviour
 {
     public GameObject knife;
     float rand = 0;
+    bool worked = false;
     // Start is called before the first frame update
-    private void Start()
+    void Update()
     {
-        InvokeRepeating("KnifeSpawn", 0, 5);
+        if(bird.instance.transform.position.y >= 1100 && !worked)
+        {
+            KnifeSpawn();
+            worked = true;
+        }
     }
     void KnifeSpawn()
     {

@@ -10,6 +10,6 @@ public class goup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       transform.position += new Vector3(0, 90, 0) * speed/12 * Time.deltaTime; 
+       transform.position += new Vector3(0, 90, 0) * speed/6 * Time.deltaTime; 
     }
 }

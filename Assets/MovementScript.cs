@@ -5,10 +5,22 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     public GameObject targ;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float waitForSeconds = 3f;
     // Start is called before the first frame update
 
+    private float elapsedTime = 0;
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, targ.transform.position.y);
+        if(elapsedTime >= waitForSeconds)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, speed * Time.deltaTime);
+        } else
+        {
+            elapsedTime += Time.deltaTime;
+
+        }
+
     }
+
 }

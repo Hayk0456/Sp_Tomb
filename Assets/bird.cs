@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class bird : MonoBehaviour
 {
+    public static bird instance;
     private Rigidbody2D rb;
     public bool isarmored = false;
     public int boneus = 0;
@@ -23,6 +24,7 @@ public class bird : MonoBehaviour
     public bool IsDead = false;
     private void Start()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
         target_intensity = 0.67f;
 
