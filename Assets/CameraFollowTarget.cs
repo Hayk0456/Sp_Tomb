@@ -23,7 +23,7 @@ public class CameraFollowTarget : MonoBehaviour
         //{
         if (Bird.IsDead == false)
         {
-            transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x, target.position.y + 4, transform.position.z),5*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x, target.position.y+23, transform.position.z),5*Time.deltaTime);
         }
         else
         {

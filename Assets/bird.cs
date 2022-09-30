@@ -12,7 +12,7 @@ public class bird : MonoBehaviour
     public int boneus = 0;
     Vector3 StartPos;
     private Vector3 force;
-    [SerializeField] private Vector3 forceMultipliers = new Vector3(0.2f, 0.4f, 0);
+    [SerializeField] private Vector3 forceMultipliers;
     float cooldown;
     bool check;
     float y_veloc_control = -30f;
@@ -27,8 +27,6 @@ public class bird : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         target_intensity = 0.67f;
-
-
     }
 
 
@@ -49,7 +47,7 @@ public class bird : MonoBehaviour
         {
 
             y_veloc_control = -10f;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 20f));//20f
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 25f));//20f
             //Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             //difference.Normalize();
             var rv = rb.velocity.normalized;
@@ -63,6 +61,7 @@ public class bird : MonoBehaviour
                 //rb.centerOfMass = new Vector2(rb.centerOfMass.x, 10);
                 transform.GetChild(0).rotation = Quaternion.Lerp(transform.GetChild(0).rotation, target, 4 * Time.deltaTime);
             }
+            //transform.GetChild(0).rotation = Quaternion.Lerp(transform.GetChild(0).rotation, target, 10 * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
             //Debug.Log(rb.centerOfMass);
 
@@ -123,7 +122,7 @@ public class bird : MonoBehaviour
                 }
                 else
                 {
-                    rb.AddForce(appliedForce);
+                    rb.AddForce(appliedForce/2);
                 }
 
                 check = true;

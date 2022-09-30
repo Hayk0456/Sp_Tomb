@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BoneSpawner : MonoBehaviour
 {
+    bird bird;
     public GameObject bone;
     float rand = 0;
     // Start is called before the first frame update
     void Start()
     {
+
         InvokeRepeating("BoneSpawn", 0, 15);
     }
 
