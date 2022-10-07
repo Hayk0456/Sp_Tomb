@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -39,7 +37,7 @@ public class Enemy : MonoBehaviour
         //rayscaler++;
         //countdown = Random.Range(0, 11);
         //}
-       // ray.localScale = new Vector3(rayscaler += 0.001f, 0.1f, 1);
+        // ray.localScale = new Vector3(rayscaler += 0.001f, 0.1f, 1);
         //Debug.Log(rayscaler);
     }
 }

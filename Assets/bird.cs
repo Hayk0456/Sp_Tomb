@@ -1,24 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Rendering.Universal;
 
-public class bird : MonoBehaviour
+public class Bird : MonoBehaviour
 {
-    public static bird instance;
+    public static Bird instance;
     private Rigidbody2D rb;
-    public bool isarmored = false;
-    public int boneus = 0;
-    Vector3 StartPos;
+    public bool isArmored = false;
+
+    public int bonus = 0;
+    public int Bonus
+    {
+        get { return bonus; }
+        set { if (value < 0) return; bonus = value; }
+    } 
+    Vector3 startPos;
     private Vector3 force;
     [SerializeField] private Vector3 forceMultipliers;
     float cooldown;
     bool check;
-    float y_veloc_control = -30f;
+    float yVelocityControl = -30f;
     Quaternion target;
     public Light2D sun;
-    float target_intensity;
+    float targetIntensity;
     public GameObject armor;
 
     public bool IsDead = false;
@@ -26,41 +29,42 @@ public class bird : MonoBehaviour
     {
         instance = this;
         rb = GetComponent<Rigidbody2D>();
-        target_intensity = 0.67f;
+        targetIntensity = 0.67f;
     }
 
 
     private void Update()
     {
-        if(boneus >= 5)
+
+        if (IsDead)
         {
-            isarmored = true;
-            armor.SetActive(true);
-        }
-        if(IsDead)
-        {
-            target_intensity = Mathf.Lerp(target_intensity, 0, Time.deltaTime+0.03f);
-            sun.intensity = target_intensity;
+            targetIntensity = Mathf.Lerp(targetIntensity, 0, Time.deltaTime + 0.03f);
+            sun.intensity = targetIntensity;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -70, -40));
         }
         else
         {
 
-            y_veloc_control = -10f;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, y_veloc_control, 25f));//20f
+            yVelocityControl = -10f;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, yVelocityControl, 25f));//20f
+
             //Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             //difference.Normalize();
+
             var rv = rb.velocity.normalized;
             float rotationZ = Mathf.Atan2(rv.y, rv.x) * Mathf.Rad2Deg;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            if (rb.velocity != Vector2.zero )
+            if (rb.velocity != Vector2.zero)
                 target = Quaternion.Euler(0, 0, rotationZ - 90);
-            if(target.z>-0.5 && target.z < 0.5)
+            if (target.z > -0.5 && target.z < 0.5)
             {
                 rb.constraints = RigidbodyConstraints2D.None;
+
                 //rb.centerOfMass = new Vector2(rb.centerOfMass.x, 10);
+
                 transform.GetChild(0).rotation = Quaternion.Lerp(transform.GetChild(0).rotation, target, 4 * Time.deltaTime);
             }
+
             //transform.GetChild(0).rotation = Quaternion.Lerp(transform.GetChild(0).rotation, target, 10 * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
             //Debug.Log(rb.centerOfMass);
@@ -79,16 +83,16 @@ public class bird : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                StartPos = Input.mousePosition;
+                startPos = Input.mousePosition;
 
             }
             if (Input.GetMouseButton(0) && !check)
             {
                 Time.timeScale = 0.4f;
                 cooldown = 0.6f;
-                force = (Input.mousePosition - StartPos);
+                force = (Input.mousePosition - startPos);
                 Debug.Log(force);
-                
+
                 /*
                 if ((Force.x) > 350)
                 {
@@ -107,22 +111,22 @@ public class bird : MonoBehaviour
                     Force.y = -800;
                 }
                 */
-                
+
             }
             if (Input.GetMouseButtonUp(0) && cooldown == 0.6f)
             {
-               // y_veloc_control = -1f;
+                // y_veloc_control = -1f;
                 Time.timeScale = 1f;
                 force = force.normalized;
                 //Debug.Log(force);
                 var appliedForce = new Vector3(force.x * forceMultipliers.x, force.y * forceMultipliers.y, force.z * forceMultipliers.z);
                 if (rb.velocity.y < -20)
                 {
-                    rb.AddForce(appliedForce/2,ForceMode2D.Impulse);
+                    rb.AddForce(appliedForce / 2, ForceMode2D.Impulse);
                 }
                 else
                 {
-                    rb.AddForce(appliedForce/2);
+                    rb.AddForce(appliedForce / 2);
                 }
 
                 check = true;
@@ -140,22 +144,42 @@ public class bird : MonoBehaviour
                 }
             }
         }
-       
+
 
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-
-
-        if (other.gameObject.tag == "Coin")
+        if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "bone")
+        if (other.gameObject.tag == "bone")
         {
-            Destroy(other.gameObject);
-            boneus++;
-            Debug.Log(boneus);
+            bonus++;
+            Debug.Log(bonus);
+        }
+        if (other.gameObject.CompareTag("Hit") || other.gameObject.CompareTag("laser"))
+        {
+            if(!isArmored)
+            {
+                IsDead = true;
+                GameManager.Singleton.CallOnBirdDied();
+                GameManager.Singleton.SetTimeScale(1f);
+                return;
+            }
+            isArmored = false;
+            bonus = 0;
+            armor.SetActive(false);
+        }
+    }
+
+    private void AddBonus(int amount)
+    {
+        bonus += amount;
+        if (bonus >= 5)
+        {
+            isArmored = true;
+            armor.SetActive(true);
         }
     }
 }

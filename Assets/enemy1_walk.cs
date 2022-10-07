@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class enemy1_walk : MonoBehaviour
@@ -14,6 +12,6 @@ public class enemy1_walk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nazduwar.position = new Vector3(nazduwar.position.x, nazduwar.position.y-0.01f, nazduwar.position.z);
+        nazduwar.position = new Vector3(nazduwar.position.x, nazduwar.position.y - 0.01f, nazduwar.position.z);
     }
 }

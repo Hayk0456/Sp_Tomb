@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KnifeHitting : MonoBehaviour
@@ -7,16 +5,16 @@ public class KnifeHitting : MonoBehaviour
     public GameObject knife;
     float rand = 0;
     bool worked = false;
-    bird Bird;
+    Bird Bird;
 
     private void Start()
     {
-        Bird = FindObjectOfType<bird>();
+        Bird = FindObjectOfType<Bird>();
     }
     // Start is called before the first frame update
     void Update()
     {
-        if(bird.instance.transform.position.y >= 1100 && !worked)
+        if (Bird.instance.transform.position.y >= 1100 && !worked)
         {
             KnifeSpawn();
             worked = true;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementScript : MonoBehaviour
@@ -12,10 +10,11 @@ public class MovementScript : MonoBehaviour
     private float elapsedTime = 0;
     void Update()
     {
-        if(elapsedTime >= waitForSeconds)
+        if (elapsedTime >= waitForSeconds)
         {
             transform.position = Vector3.MoveTowards(transform.position, targ.transform.position, speed * Time.deltaTime);
-        } else
+        }
+        else
         {
             elapsedTime += Time.deltaTime;
 

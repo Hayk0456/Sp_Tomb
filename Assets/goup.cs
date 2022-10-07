@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class goup : MonoBehaviour
+public class Goup : MonoBehaviour
 {
     float speed = 10f;
     // Start is called before the first frame update
@@ -10,6 +8,6 @@ public class goup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       transform.position += new Vector3(0, 90, 0) * speed/6 * Time.deltaTime; 
+        transform.position += new Vector3(0, 90, 0) * speed / 6 * Time.deltaTime;
     }
 }

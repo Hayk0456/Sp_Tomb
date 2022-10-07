@@ -1,60 +1,96 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    bird bird;
-    public TMP_Text cointext;
-    public TextMeshProUGUI youdied;
-    public TextMeshProUGUI youwon;
+    public static GameManager Singleton { get; private set; }
+    public TMP_Text coinText;
+    public TextMeshProUGUI youDied;
+    public TextMeshProUGUI youWon;
     public Image anun;
     public Button restart;
     float restarto = 0;
     float dilate = 0;
-    public bool isended = false;
-    // Start is called before the first frame update
+
+    public Action OnBirdDied;
+    public Action OnBonusCollected;
+    public Action OnEnded;
+    private void Awake()
+    {
+        if (Singleton != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Singleton = this;
+        }
+
+        OnEnded += () =>
+        {
+            youWon.enabled = true;
+            coinText.enabled = false;
+            anun.enabled = false;
+        };
+    } 
     void Start()
     {
-        bird = FindObjectOfType<bird>();
-        restart.interactable = false ;
-        bird.GetComponent<Rigidbody2D>().isKinematic = true;
-        bird.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        restart.interactable = false;
+        Bird.instance.GetComponent<Rigidbody2D>().isKinematic = true;
+        Bird.instance.GetComponentInChildren<SpriteRenderer>().enabled = false;
         Invoke("birdenable", 4);
-    }
-    
-    void birdenable()
-    {
-        bird.GetComponent<Rigidbody2D>().isKinematic = false;
-        bird.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        AddOnBirdDied(() => {
+            youDied.text = "YOU DIED";
+            youDied.color = new Color(youDied.color.r, youDied.color.g, youDied.color.b, dilate);
+            restart.image.color = new Color(restart.image.color.r, restart.image.color.g, restart.image.color.b, restarto);
+            restart.interactable = true;
+            dilate = Mathf.Lerp(dilate, 255, Time.deltaTime/50);
+            restarto = Mathf.Lerp(restarto, 200, Time.deltaTime / 50);
+        });
     }
 
-    
+    void birdenable()
+    {
+        Bird.instance.GetComponent<Rigidbody2D>().isKinematic = false;
+        Bird.instance.GetComponentInChildren<SpriteRenderer>().enabled = true;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
-        cointext.text = "Height: " + (bird.transform.position.y + 16).ToString("F0") + "cm" +"";
-        if(bird.IsDead == true)
-        {
-            youdied.text = "YOU DIED";
-            youdied.color = new Color(youdied.color.r, youdied.color.g, youdied.color.b, dilate);
-            restart.image.color = new Color(restart.image.color.r, restart.image.color.g, restart.image.color.b, restarto);
-            restart.interactable = true;
-            dilate = Mathf.Lerp(dilate, 255, Time.deltaTime/101);
-            restarto = Mathf.Lerp(restarto, 130, Time.deltaTime / 101);
-
-
-        }
-
-        if (isended)
-        {
-            youwon.enabled = true;
-            cointext.enabled = false;
-            anun.enabled = false;
-            
-        }
+        Debug.Log(Bird.instance);
+        coinText.text = "Height: " + (Bird.instance.transform.position.y + 16).ToString("F0") + "cm" + "";
     }
 
+    public void SetTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+    }
+
+    public void CallOnBirdDied()
+    {
+        OnBirdDied?.Invoke();
+    }
+
+    public void AddOnBirdDied(Action action) {
+        OnBirdDied += action;
+    }
+
+    public void CallOnBonusCollected()
+    {
+        OnBonusCollected?.Invoke();
+    }
+
+    public void AddOnBonusCollected(Action action)
+    {
+        OnBonusCollected += action;
+    }
+    
+    public void CallOnEnded()
+    {
+        OnEnded?.Invoke();
+    }
 }

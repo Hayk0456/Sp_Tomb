@@ -1,6 +1,3 @@
-using System.Collections;
-
-using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -21,70 +18,71 @@ public class EnemyBlockThrower : MonoBehaviour
     private float time;
 
     public bool forceFire;
-
-    // Start is called before the first frame update
-
-    void Start()
-
+    private bool canSpawn;
+    private void Start()
     {
-
         forceFire = true;
 
         time = WaitTime;
 
-        //InvokeRepeating("fire", 0f, 0.6f);
-
+        InvokeRepeating("Fire", 0f, 6);
     }
 
-    // Update is called once per frame
-
-    void Update()
+/*    void Update()
 
     {
-
         if (forceFire == true)
-
         {
-
             if (time > 0)
-
             {
-
                 time -= Time.deltaTime;
-
             }
-
             else
 
             {
-
                 fire();
                 Debug.Log("Fired");
                 time = WaitTime;
-
             }
-
         }
-
     }
-
-    void fire()
-
+*/
+    private void Fire()
     {
-
-        int rand = Random.Range(0, 10);
-
+        /*        var startRot = 180f;
+                foreach (var throwable in throwables){
+                    throwable.transform.position = transform.position;
+                    throwable.transform.eulerAngles = new Vector3(0, 180, startRot + 30);
+                    startRot += 30;
+                }*/
+        if (!canSpawn) return;
         GameObject tmp1 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp1.transform.Rotate(new Vector3(0, 180, 180));
+        tmp1.transform.Rotate(new Vector3(0, 180, 180));
         GameObject tmp5 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp5.transform.Rotate(new Vector3(0, 180, 240));
+        tmp5.transform.Rotate(new Vector3(0, 180, 240));
         GameObject tmp6 = Instantiate(bullet, transform.position, new Quaternion());
         tmp6.transform.Rotate(new Vector3(0, 180, 270));
         GameObject tmp9 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp9.transform.Rotate(new Vector3(0, 180, 300));
+        tmp9.transform.Rotate(new Vector3(0, 180, 300));
         GameObject tmp11 = Instantiate(bullet, transform.position, new Quaternion());
-            tmp11.transform.Rotate(new Vector3(0, 180, 360));
+        tmp11.transform.Rotate(new Vector3(0, 180, 360));
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("asda");
+        if(collision.gameObject.CompareTag("bird"))
+        {
+            canSpawn = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("bird"))
+        {
+            canSpawn = false;
+        }
     }
 
 }

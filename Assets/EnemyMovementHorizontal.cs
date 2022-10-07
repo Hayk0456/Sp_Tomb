@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovementHorizontal : MonoBehaviour
@@ -14,6 +12,6 @@ public class EnemyMovementHorizontal : MonoBehaviour
         {
             k = -1 * k;
         }
-        transform.Translate(k * Time.deltaTime*5, 0, 0);
+        transform.Translate(k * Time.deltaTime * 5, 0, 0);
     }
 }
