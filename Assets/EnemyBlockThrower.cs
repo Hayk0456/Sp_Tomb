@@ -13,7 +13,7 @@ public class EnemyBlockThrower : MonoBehaviour
 
 
 
-    private float WaitTime = 6f;
+    private float WaitTime = 4f;
 
     private float time;
 
@@ -25,7 +25,7 @@ public class EnemyBlockThrower : MonoBehaviour
 
         time = WaitTime;
 
-        InvokeRepeating("Fire", 0f, 6);
+        InvokeRepeating("Fire", 0f, 7);
     }
 
 /*    void Update()

@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
             youDied.color = new Color(youDied.color.r, youDied.color.g, youDied.color.b, dilate);
             restart.image.color = new Color(restart.image.color.r, restart.image.color.g, restart.image.color.b, restarto);
             restart.interactable = true;
-            dilate = Mathf.Lerp(dilate, 255, Time.deltaTime/50);
-            restarto = Mathf.Lerp(restarto, 200, Time.deltaTime / 50);
+            dilate = Mathf.Lerp(dilate, 255, Time.deltaTime/25);
+            restarto = Mathf.Lerp(restarto, 200, Time.deltaTime / 25);
         });
     }
 
