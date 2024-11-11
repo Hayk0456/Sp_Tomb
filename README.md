@@ -1,4 +1,4 @@
-
+Sparrow Tomb is a 2d Arcade Runner game that was created by me(Game Designer/Developer), Hakob Khachikyan(Game Developer) and Marita Movsisyan(Artist). During ancient times humanity was living in misery and pure suffering, that is until 5 Gods appeared and offered humanity a prosperious life for a reasonable sacrifice which was the life of an innocent creature from Earth. As a sacrificial animal, sparrow was chosen, the tradition carried on for a long time and our story takes place long years after that event. Our sparrow was chosen as the yearly sacrifice, put in the tube of sacrificial testament that caused death to millions of sparrows yet none managed to conquered it, will our main character be the first one to escape this hell?
 
 https://github.com/user-attachments/assets/983f9b4c-42ee-4f35-9411-cb70d5c7be61
 
